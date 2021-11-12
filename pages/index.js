@@ -7,7 +7,7 @@ import { Box, Text, Container } from '@chakra-ui/react';
 
 //Components
 import Nav from '../components/Nav';
-
+import Wave from '../components/Wave';
 //Styles
 import styles from '../styles/index.module.scss'
 
@@ -23,6 +23,8 @@ export default function Home() {
 <div className={styles.container}>
   <h1 className={styles.title}>Welcome to uiTodo </h1>
 </div>
+<Wave color='#fff'/>
+
 
     </main>
 
