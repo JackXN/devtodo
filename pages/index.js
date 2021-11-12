@@ -21,7 +21,7 @@ export default function Home() {
     
     <main className={styles.waveContainer}>
 <div className={styles.container}>
-  <h1 className={styles.title}>Welcome to uiTodo </h1>
+  <h1 className={styles.title}>Welcome to uitodo </h1>
 </div>
 <Wave color='#fff'/>
 

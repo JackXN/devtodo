@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
   <>
-  <Nav/>
+  {/* <Nav/> */}
   <Component {...pageProps} />
 </>
   )}
