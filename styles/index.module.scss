@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap');
+
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 0;
+
+    &.afterWave {
+        background-color: #ffff;
+        color: #09f;
+        padding-bottom: 4rem;
+    }
+}
+
+.title {
+    font-size: 4rem;
+    margin: 7rem 1.25rem 2.5rem 1.25rem;
+}
+
+.subTitle {
+    font-size: 3rem;
+    margin: 7rem 1.25rem 2.5rem 1.25rem;
+}
+
+@keyframes animateWave {
+0% {
+    transform: scale(1,0);
+}
+100% {
+    transform: scale(1,1);
+}
+}
+
+.waveContainer {
+    backgorund: #09f;
+    color: #fff;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+
+>svg {
+    display: block;
+    transform-origin: bottom;
+    animation: animateWave 1000ms cubic-bezier(0.23, 1,0.32,1) forwards;
+}
+}
+
+.latestButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .icon {
+        margin-left: 10rem;
+        width: 10px;
+    }
+}
+
