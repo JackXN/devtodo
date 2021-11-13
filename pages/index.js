@@ -1,10 +1,10 @@
+
+
 import Head from 'next/head'
 import Image from 'next/image'
 // import styles from '../styles/Home.module.css';
 import { Box, Text, Container } from '@chakra-ui/react';
-
-//Utils
-
+import Modal from 'react-modal';
 //Components
 import Nav from '../components/Nav';
 import Wave from '../components/Wave';
@@ -13,6 +13,7 @@ import Button from '../components/common/Button';
 import styles from '../styles/index.module.scss'
 
 export default function Home() {
+  Modal.setAppElement('#__next');
   return (
     <>
   <Head>
