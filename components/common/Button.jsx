@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from '../../styles/button.module.scss';
-
+import Modal from 'react-modal';
 const Button = () => {
+
+  Modal.setAppElement('#__next');
+  const [modalIsOpen, setIsOpen] = useState(false);
+const openModal = () => {
+  setIsOpen(true);
+}
+
+const closeModal = () => {
+  setIsOpen(false);
+}
+
 
     const customStyles = {
         content: {
@@ -15,10 +26,9 @@ const Button = () => {
       };
 
 
-
     return (
     <>
-<button className={styles.btn}>Create To-Do List</button>
+<button className={styles.btn} onClick={openModal}>Create To-Do List</button>
     </>
     )
 }

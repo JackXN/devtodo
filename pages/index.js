@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 //Components
 import Nav from '../components/Nav';
 import Wave from '../components/Wave';
-// import Button from '../components/common/Button';
+import Button from '../components/common/Button';
 //Styles
 import styles from '../styles/index.module.scss'
 
@@ -42,6 +42,34 @@ const customStyles = {
   },
 };
 
+const styles = {
+  container: {
+    display: 'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    padding: '2rem 0',
+  
+  '&:afterWave': {
+    backgroundColor: '#fff',
+    color: '#09f',
+    pb: '4rem',
+
+  }
+  
+  },
+
+  title: {
+    fontSize: '4rem',
+    margin: '7rem 1.25rem 2.5rem',
+
+  },
+  
+  subTitle: {
+    fontSize: '3rem',
+    margin: '7rem 1.25rem 2.5rem'
+  }
+
+}
 
 
 
@@ -49,29 +77,30 @@ const customStyles = {
     <>
   <Head>
     <title>uitodo</title>
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico"/>
   </Head>
     
     <main className={styles.waveContainer}>
 <div className={styles.container}>
   <h1 className={styles.title}>Welcome to uitodo </h1>
-  <button type='primary' onClick={openModal}>Create To-Do List</button>
+  <button type='primary' onClick={openModal} 
+  style={{
+    fontFamily: 'Space Grotest, sans-serif',
+    border: 'none',
+    padding: '1rem 2rem',
+    margin: '1rem 0',
+    margin: '1rem'
+  }}
+  >Create To-Do List</button>
 </div>
 <Wave color='#fff'/>
     </main>
   <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel='Example Modal'>
-<div>
-  <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-    </div>
-
+<div className={styles.modalContainer}>
+  <form className={styles.modalForm}>
+    
+  </form>
+</div>
 
   </Modal>
 
