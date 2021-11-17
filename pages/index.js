@@ -9,7 +9,9 @@ import { useRouter } from 'next/router'
 //Components
 import Nav from '../components/Nav';
 import Wave from '../components/Wave';
-import Button from '../components/common/Button';
+// import Button from '../components/common/Button';
+import {Button, input} from '@chakra-ui/react';
+
 //Styles
 import styles from '../styles/index.module.scss'
 
@@ -40,36 +42,26 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
+  button: {
+    fontFamily: 'Space Grotest, sans-serif',
+    border: 'none',
+    padding: '1rem 2rem',
+    margin: '1rem 0',
+fontSize: '1rem',
+borderRadius: '5px',
+outline: '0',
+cursor: 'pointer',
+// boxShadow: '0px 8px 15px rgba(0,0,0,,0.1)',
+transition: 'all 0.3s ease 0s',
+
+
+'&:hover': {
+  boxShadow: '0px 15px 20px rgba(255,255,255,0.4)',
+  transform: 'translateY(-3px)',
+}
+  }
 };
 
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems:'center',
-    justifyContent:'center',
-    padding: '2rem 0',
-  
-  '&:afterWave': {
-    backgroundColor: '#fff',
-    color: '#09f',
-    pb: '4rem',
-
-  }
-  
-  },
-
-  title: {
-    fontSize: '4rem',
-    margin: '7rem 1.25rem 2.5rem',
-
-  },
-  
-  subTitle: {
-    fontSize: '3rem',
-    margin: '7rem 1.25rem 2.5rem'
-  }
-
-}
 
 
 
@@ -83,21 +75,17 @@ const styles = {
     <main className={styles.waveContainer}>
 <div className={styles.container}>
   <h1 className={styles.title}>Welcome to uitodo </h1>
-  <button type='primary' onClick={openModal} 
-  style={{
-    fontFamily: 'Space Grotest, sans-serif',
-    border: 'none',
-    padding: '1rem 2rem',
-    margin: '1rem 0',
-    margin: '1rem'
-  }}
-  >Create To-Do List</button>
+  <Button type='primary' onClick={openModal} 
+sx={customStyles.button}
+  >Create To-Do List</Button>
 </div>
 <Wave color='#fff'/>
     </main>
   <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel='Example Modal'>
 <div className={styles.modalContainer}>
+  <h2>Enter list details</h2>
   <form className={styles.modalForm}>
+    <input/>
     
   </form>
 </div>

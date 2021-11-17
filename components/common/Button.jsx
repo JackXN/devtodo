@@ -28,7 +28,7 @@ const closeModal = () => {
 
     return (
     <>
-<button className={styles.btn} onClick={openModal}>Create To-Do List</button>
+<button className={styles.btn} onClick={openModal}>Create To-Do List </button>
     </>
     )
 }
