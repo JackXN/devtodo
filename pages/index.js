@@ -5,7 +5,7 @@ import Image from 'next/image'
 import {useState} from 'react';
 import { Box, Text, Container } from '@chakra-ui/react';
 import Modal from 'react-modal';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 //Components
 import Nav from '../components/Nav';
 import Wave from '../components/Wave';
@@ -16,6 +16,52 @@ import {Button, Input, FormControl, Stack} from '@chakra-ui/react';
 import styles from '../styles/index.module.scss'
 
 export default function Home() {
+
+const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
+const [error, setError] = useState('');
+const [message, setMessage] = useState('');
+
+const handlePost = async (e) => {
+  e.preventDefault();
+
+  //reset error and message
+  setError('');
+  setMessage('');
+
+// fields check
+if(!title || !description) return setError('All fields are required');
+
+// post structure
+let post = {
+  title,
+  description,
+  completed: false,
+  createdAt: new Date().toISOString(),
+}
+
+// save the post
+let response = await fetch('/api/posts', {
+  method: 'POST',
+  body: JSON.stringify(post),
+})
+
+// get the data
+let data = await response.json();
+if(data.success) {
+  setTitle('');
+  setDescription('');
+  return setMessage(data.message);
+} else {
+  return setError(data.message);
+}
+
+}
+
+
+
+
+
   Modal.setAppElement('#__next');
   const router = useRouter();
 
@@ -32,6 +78,48 @@ const closeModal = () => {
 function afterOpenModal() {
 
 }
+
+
+
+
+
+  return (
+    <>
+  <Head>
+    <title>uitodo</title>
+    <link rel="icon" href="/favicon.ico"/>
+  </Head>
+    
+    <main className={styles.waveContainer}>
+<div className={styles.container}>
+  <h1 className={styles.title}>Welcome to uitodo </h1>
+  <Button type='primary' onClick={openModal} 
+sx={customStyles.button}
+  >Create To-Do List</Button>
+</div>
+<Wave color='#fff'/>
+    </main>
+  <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} className={styles.modal} contentLabel='Example Modal'>
+<Box sx={customStyles.modalContainer}>
+  <h2>Enter list details</h2>
+  <FormControl sx={customStyles.modalForm}>
+    <Stack spacing={10}>
+    <Input placeholder='Title' size='lg' sx={customStyles.input}/>
+    <Input placeholder='Description' size='lg' sx={customStyles.input}/>
+   </Stack>
+   <Button sx={customStyles.button} pt='20px'>Create To-Do</Button>
+    
+  </FormControl>
+</Box>
+
+  </Modal>
+
+
+
+    </>
+  )
+}
+
 
 const customStyles = {
   content: {
@@ -102,43 +190,3 @@ transition: 'all 0.3s ease 0s',
 }
 
 };
-
-
-
-
-  return (
-    <>
-  <Head>
-    <title>uitodo</title>
-    <link rel="icon" href="/favicon.ico"/>
-  </Head>
-    
-    <main className={styles.waveContainer}>
-<div className={styles.container}>
-  <h1 className={styles.title}>Welcome to uitodo </h1>
-  <Button type='primary' onClick={openModal} 
-sx={customStyles.button}
-  >Create To-Do List</Button>
-</div>
-<Wave color='#fff'/>
-    </main>
-  <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} className={styles.modal} contentLabel='Example Modal'>
-<Box sx={customStyles.modalContainer}>
-  <h2>Enter list details</h2>
-  <FormControl sx={customStyles.modalForm}>
-    <Stack spacing={10}>
-    <Input placeholder='Title' size='lg' sx={customStyles.input}/>
-    <Input placeholder='Description' size='lg' sx={customStyles.input}/>
-   </Stack>
-   <Button sx={customStyles.button} pt='20px'>Create To-Do</Button>
-    
-  </FormControl>
-</Box>
-
-  </Modal>
-
-
-
-    </>
-  )
-}
