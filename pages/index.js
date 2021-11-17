@@ -58,10 +58,6 @@ if(data.success) {
 
 }
 
-
-
-
-
   Modal.setAppElement('#__next');
   const router = useRouter();
 
@@ -102,12 +98,16 @@ sx={customStyles.button}
   <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} className={styles.modal} contentLabel='Example Modal'>
 <Box sx={customStyles.modalContainer}>
   <h2>Enter list details</h2>
-  <FormControl sx={customStyles.modalForm}>
+  <FormControl sx={customStyles.modalForm} onSubmit={handlePost}>
+    {error ? (
+alert('error')
+    ): null}
+
     <Stack spacing={10}>
-    <Input placeholder='Title' size='lg' sx={customStyles.input}/>
-    <Input placeholder='Description' size='lg' sx={customStyles.input}/>
+    <Input placeholder='Title' size='lg' sx={customStyles.input} type='text' name='title' onChange={(e) => setTitle(e.target.value)} value={title}/>
+    <Input placeholder='Description' size='lg' sx={customStyles.input} name='description' onChange={(e) => setDescription(e.target.value)} value={description}/>
    </Stack>
-   <Button sx={customStyles.button} pt='20px'>Create To-Do</Button>
+   <Button sx={customStyles.button} pt='20px' type='submit'>Create To-Do</Button>
     
   </FormControl>
 </Box>
