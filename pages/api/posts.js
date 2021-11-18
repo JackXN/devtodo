@@ -26,7 +26,17 @@ return deletePost(req,res)
 // Fetch all posts
 async function getPosts(req,res) {
     try{
-
+let {db} = await connectToDatabase();
+let posts = await db
+.collection('')
+.find({})
+.sort({ published: -1})
+.toArray();
+// return the posts
+return res.json({
+    message: JSON.parse(JSON.stringify(posts)),
+    success: true
+})
     } catch(error) {
         return res.json({
             message: new Error(error).message,
