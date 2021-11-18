@@ -22,3 +22,15 @@ return deletePost(req,res)
 }
 }
 }
+
+// Fetch all posts
+async function getPosts(req,res) {
+    try{
+
+    } catch(error) {
+        return res.json({
+            message: new Error(error).message,
+            success: false,
+        })
+    }
+}

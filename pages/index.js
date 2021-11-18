@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 //Components
 import Nav from '../components/Nav';
 import Wave from '../components/Wave';
+import LatestTodos from '../components/index/LatestTodos';
 // import Button from '../components/common/Button';
 import {Button, Input, FormControl, Stack} from '@chakra-ui/react';
 
@@ -16,6 +17,11 @@ import {Button, Input, FormControl, Stack} from '@chakra-ui/react';
 import styles from '../styles/index.module.scss'
 
 export default function Home() {
+  
+  const posts = [{
+    title: 'post one',
+    description: 'post one desc',
+  }]
 
 const [title, setTitle] = useState('');
 const [description, setDescription] = useState('');
@@ -111,8 +117,8 @@ alert('error')
     
   </FormControl>
 </Box>
-
   </Modal>
+  <LatestTodos posts={posts}/>
 
 
 
