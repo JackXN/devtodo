@@ -21,14 +21,14 @@ case 'DELETE)': {
 return deletePost(req,res) 
 }
 }
-}
+
 
 // Fetch all posts
 async function getPosts(req,res) {
     try{
 let {db} = await connectToDatabase();
 let posts = await db
-.collection('')
+.collection('todo_notes')
 .find({})
 .sort({ published: -1})
 .toArray();
@@ -43,4 +43,25 @@ return res.json({
             success: false,
         })
     }
+}
+
+async function addPost(req,res) {
+    try {
+        //connect to database
+        let {db} = await connectToDatabase();
+        //add the post
+        await db.collection('posts').insertOne(JSON.parse(req.body));
+        //return a message
+        return res.json({
+            message: 'Post added successfully',
+            success: true
+        })
+    }catch(error) {
+return res.json({
+    message: new Error(error).message,
+success: false,
+})
+    }
+}
+
 }
