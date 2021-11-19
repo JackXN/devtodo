@@ -120,7 +120,7 @@ export default function Home() {
                 size="lg"
                 sx={customStyles.input}
                 name="description"
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
                 value={description}
               />
             </Stack>

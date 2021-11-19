@@ -50,7 +50,7 @@ async function addPost(req,res) {
         //connect to database
         let {db} = await connectToDatabase();
         //add the post
-        await db.collection('posts').insertOne(JSON.parse(req.body));
+        await db.collection('todo_notes').insertOne(JSON.parse(req.body));
         //return a message
         return res.json({
             message: 'Post added successfully',
