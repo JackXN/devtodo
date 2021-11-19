@@ -8,19 +8,15 @@ import { useRouter } from "next/router";
 import Nav from "../components/Nav";
 import Wave from "../components/Wave";
 import LatestTodos from "../components/index/LatestTodos";
+import PostCard from "../components/common/PostCard";
 // import Button from '../components/common/Button';
 import { Button, Input, FormControl, Stack } from "@chakra-ui/react";
 
 //Styles
 import styles from "../styles/index.module.scss";
 
-export default function Home() {
-  const posts = [
-    {
-      title: "post one",
-      description: "post one desc",
-    },
-  ];
+export default function Home({posts}) {
+
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -130,10 +126,43 @@ export default function Home() {
           </FormControl>
         </Box>
       </Modal>
-      <LatestTodos posts={posts} />
+    
+<div>
+  {posts.length === 0 ? (
+    <h2>There are no posts</h2>
+  ) : (
+    <ul>
+      {posts.map((post,index) => (
+        <PostCard post={post} key={index}/>
+      ))}
+    </ul>
+  )}
+</div>
+
+
     </>
   );
 }
+
+// Server side rendering. Fetch data on each request
+export async function getServerSideProps(ctx) {
+  // get the current environment
+  let dev = process.env.NODE_ENV !== 'production';
+  let {DEV_URL, PROD_URL} = process.env;
+
+  //request posts from api
+  let response = await fetch(`/api/posts`);
+// extract the data
+let data = await response.json();
+
+return {
+  props: {
+      posts: data['message'],
+  }
+}
+}
+
+
 
 const customStyles = {
   content: {
