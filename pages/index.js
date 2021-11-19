@@ -26,37 +26,43 @@ export default function Home({posts}) {
   const handlePost = async (e) => {
     e.preventDefault();
 
-    //reset error and message
-    setError("");
-    setMessage("");
+    // reset error and message
+    setError('');
+    setMessage('');
 
     // fields check
-    if (!title || !description) return setError("All fields are required");
+    if (!title || !content) return setError('All fields are required');
 
     // post structure
     let post = {
-      title,
-      description,
-      completed: false,
-      createdAt: new Date().toISOString(),
+        title,
+        content,
+        published: false,
+        createdAt: new Date().toISOString(),
     };
-
     // save the post
-    let response = await fetch("/api/posts", {
-      method: "POST",
-      body: JSON.stringify(post),
+    let response = await fetch('/api/posts', {
+        method: 'POST',
+        body: JSON.stringify(post),
     });
 
     // get the data
     let data = await response.json();
+
     if (data.success) {
-      setTitle("");
-      setDescription("");
-      return setMessage(data.message);
+        // reset the fields
+        setTitle('');
+        setContent('');
+        // set the message
+        return setMessage(data.message);
     } else {
-      return setError(data.message);
+        // set the error
+        console.log(error)
+        return setError(data.message);
+    
     }
-  };
+};
+
 
   Modal.setAppElement("#__next");
   const router = useRouter();
@@ -80,15 +86,19 @@ export default function Home({posts}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
       <main className={styles.waveContainer}>
         <div className={styles.container}>
           <h1 className={styles.title}>Welcome to uitodo </h1>
+          
           <Button type="primary" onClick={openModal} sx={customStyles.button}>
             Create To-Do List
+          
           </Button>
         </div>
         <Wave color="#fff" />
       </main>
+     
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -96,6 +106,8 @@ export default function Home({posts}) {
         className={styles.modal}
         contentLabel="Example Modal"
       >
+        
+        {/* CREATE TODO FORM */}
         <Box sx={customStyles.modalContainer}>
           <h2>Enter list details</h2>
           <FormControl sx={customStyles.modalForm} onSubmit={handlePost}>
@@ -127,6 +139,10 @@ export default function Home({posts}) {
         </Box>
       </Modal>
     
+    {/* END CREATE TO DO FORM */}
+
+
+    {/* DISPLAY TODOS HERE */}
 <div>
   {posts.length === 0 ? (
     <h2>There are no posts</h2>
@@ -148,18 +164,18 @@ export default function Home({posts}) {
 export async function getServerSideProps(ctx) {
   // get the current environment
   let dev = process.env.NODE_ENV !== 'production';
-  let {DEV_URL, PROD_URL} = process.env;
+  let { DEV_URL, PROD_URL } = process.env;
 
-  //request posts from api
-  let response = await fetch(`/api/posts`);
-// extract the data
-let data = await response.json();
+  // request posts from api
+  let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
+  // extract the data
+  let data = await response.json();
 
-return {
-  props: {
-      posts: data['message'],
-  }
-}
+  return {
+      props: {
+          posts: data['message'],
+      },
+  };
 }
 
 
