@@ -1,16 +1,18 @@
 import {useState} from 'react';
 import {useRouter} from 'next/router';
 
+// Styles
+import styles from '../../styles/postCard.module.scss';
+
 export default function PostCard({post}) {
 const [publishing, setPublishing] = useState(false);
 const [deleting, setDeleting] = useState(false);
 const router = useRouter();
 
 
+
 const publishPost = async (postId) => {
     setPublishing(true);
-
-
     try{
         await fetch('/api/posts', {
             method: 'PUT',
@@ -52,20 +54,24 @@ return setDeleting(false);
 
     return (
         <>
-        <li>
-            <h3>{post.title}</h3>
+        <div className={styles.container}>
+        <h3>{post.title}</h3>
+        <li className={styles.list}>
             <p>{post.content}</p>
             <small>{new Date(post.createdAt).toLocaleDateString()}</small>
         <br/>
+        <div className={styles.buttonContainer}>
         {!post.published ? (
-            <button type='button' onClick={() => publishPost(post._id)}>
+            <button className={styles.button} style={{marginRight: '20px'}}type='button' onClick={() => publishPost(post._id)}>
                 {publishing ? 'Publishing' : 'Publish'}
             </button>
         ): null}
-    <button type='button' onClick={() => deletePost(post._id)}>
+    <button className={styles.button} type='button' onClick={() => deletePost(post._id)}>
         {deleting ? 'Deleting' : 'Delete'}
     </button>
+    </div>
         </li>
+        </div>
         </>
 
     )

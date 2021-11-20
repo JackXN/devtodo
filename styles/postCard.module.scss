@@ -1,0 +1,33 @@
+.container {
+display: flex;
+flex-direction: column;
+border: solid black 2px;
+padding: 30px;
+justify-content: center;
+align-items: center;
+
+
+
+
+}
+
+.list {
+    // list-style: none;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.button{
+    padding: 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        color: orange;
+    }
+}
+

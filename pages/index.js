@@ -152,7 +152,8 @@ export default function Home({posts}) {
 style={{
 fontFamily:"Space Grotest, sans-serif",
 color: '#009AFE',
-fontSize: '48px'
+fontSize: '48px',
+fontWeight: 'lighter'
 }}
 >
   Your latest todo items
