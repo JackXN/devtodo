@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 //Components
 import Nav from "../components/Nav";
 import Wave from "../components/Wave";
-import LatestTodos from "../components/index/LatestTodos";
+// import LatestTodos from "../components/index/LatestTodos";
 import PostCard from "../components/common/PostCard";
 // import Button from '../components/common/Button';
 import { Button, Input, FormControl, Stack } from "@chakra-ui/react";
@@ -17,6 +17,10 @@ import styles from "../styles/index.module.scss";
 
 export default function Home({posts}) {
 
+  // const posts = [{
+  //   title: 'post one',
+  //   description: 'description'
+  // }]
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -107,6 +111,7 @@ export default function Home({posts}) {
         contentLabel="Example Modal"
       >
         
+
         {/* CREATE TODO FORM */}
         <Box sx={customStyles.modalContainer}>
           <h2>Enter list details</h2>
