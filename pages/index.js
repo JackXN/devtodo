@@ -5,7 +5,7 @@ import { Box, Text, Container } from "@chakra-ui/react";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
 //Components
-import Nav from "../components/Nav";
+
 import Wave from "../components/Wave";
 // import LatestTodos from "../components/index/LatestTodos";
 import PostCard from "../components/common/PostCard";
