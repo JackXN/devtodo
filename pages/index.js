@@ -23,7 +23,7 @@ export default function Home({posts}) {
   // }]
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -57,8 +57,12 @@ export default function Home({posts}) {
         // reset the fields
         setTitle('');
         setContent('');
-        // set the message
-        return setMessage(data.message);
+
+        // set the message, close modal and refresh the page
+        return setMessage(data.message), closeModal(), router.reload()
+  
+
+   
     } else {
         // set the error
         console.log(error)
@@ -115,9 +119,7 @@ export default function Home({posts}) {
         {/* CREATE TODO FORM */}
         <Box sx={customStyles.modalContainer}>
           <h2>Enter list details</h2>
-          <FormControl sx={customStyles.modalForm} onSubmit={handlePost}>
-            {error ? alert("error") : null}
-
+          <form sx={customStyles.modalForm} onSubmit={handlePost}>
             <Stack spacing={10}>
               <Input
                 placeholder="Title"
@@ -132,15 +134,15 @@ export default function Home({posts}) {
                 placeholder="Description"
                 size="lg"
                 sx={customStyles.input}
-                name="description"
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
+                name="content"
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
               />
             </Stack>
             <Button sx={customStyles.button} pt="20px" type="submit">
               Create To-Do
             </Button>
-          </FormControl>
+          </form>
         </Box>
       </Modal>
     
@@ -166,7 +168,7 @@ export default function Home({posts}) {
 }
 
 // Server side rendering. Fetch data on each request
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(context) {
   // get the current environment
   let dev = process.env.NODE_ENV !== 'production';
   let { DEV_URL, PROD_URL } = process.env;

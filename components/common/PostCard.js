@@ -54,7 +54,7 @@ return setDeleting(false);
         <>
         <li>
             <h3>{post.title}</h3>
-            <p>{post.description}</p>
+            <p>{post.content}</p>
             <small>{new Date(post.createdAt).toLocaleDateString()}</small>
         <br/>
         {!post.published ? (
