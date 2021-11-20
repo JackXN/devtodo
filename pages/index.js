@@ -17,10 +17,7 @@ import styles from "../styles/index.module.scss";
 
 export default function Home({posts}) {
 
-  // const posts = [{
-  //   title: 'post one',
-  //   description: 'description'
-  // }]
+
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -150,9 +147,20 @@ export default function Home({posts}) {
 
 
     {/* DISPLAY TODOS HERE */}
-<div>
+<div className={styles.container}>
+<h1
+style={{
+fontFamily:"Space Grotest, sans-serif",
+color: '#009AFE',
+fontSize: '48px'
+}}
+>
+  Your latest todo items
+</h1>
   {posts.length === 0 ? (
-    <h2>There are no posts</h2>
+<Stack spacing={5}>
+  <p style={{fontFamily: 'Space Grotest, sans-serif', color: '#009AFE',}}>Nothing here... Create One?</p>
+</Stack>
   ) : (
     <ul>
       {posts.map((post,index) => (
