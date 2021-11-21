@@ -15,10 +15,7 @@ import { Button, Input, FormControl, Stack } from "@chakra-ui/react";
 //Styles
 import styles from "../styles/index.module.scss";
 
-export default function Home({posts}) {
-
-
-
+export default function Home({ posts }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
@@ -28,46 +25,41 @@ export default function Home({posts}) {
     e.preventDefault();
 
     // reset error and message
-    setError('');
-    setMessage('');
+    setError("");
+    setMessage("");
 
     // fields check
-    if (!title || !content) return setError('All fields are required');
+    if (!title || !content) return setError("All fields are required");
 
     // post structure
     let post = {
-        title,
-        content,
-        published: false,
-        createdAt: new Date().toISOString(),
+      title,
+      content,
+      published: false,
+      createdAt: new Date().toISOString(),
     };
     // save the post
-    let response = await fetch('/api/posts', {
-        method: 'POST',
-        body: JSON.stringify(post),
+    let response = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify(post),
     });
 
     // get the data
     let data = await response.json();
 
     if (data.success) {
-        // reset the fields
-        setTitle('');
-        setContent('');
+      // reset the fields
+      setTitle("");
+      setContent("");
 
-        // set the message, close modal and refresh the page
-        return setMessage(data.message), closeModal(), router.reload()
-  
-
-   
+      // set the message, close modal and refresh the page
+      return setMessage(data.message), closeModal(), router.reload();
     } else {
-        // set the error
-        console.log(error)
-        return setError(data.message);
-    
+      // set the error
+      console.log(error);
+      return setError(data.message);
     }
-};
-
+  };
 
   Modal.setAppElement("#__next");
   const router = useRouter();
@@ -90,20 +82,17 @@ export default function Home({posts}) {
         <title>uitodo</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-
       <main className={styles.waveContainer}>
         <div className={styles.container}>
           <h1 className={styles.title}>Welcome to uitodo </h1>
-          
+
           <Button type="primary" onClick={openModal} sx={customStyles.button}>
             Create To-Do List
-          
           </Button>
         </div>
         <Wave color="#fff" />
       </main>
-     
+
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -111,8 +100,6 @@ export default function Home({posts}) {
         className={styles.modal}
         contentLabel="Example Modal"
       >
-        
-
         {/* CREATE TODO FORM */}
         <Box sx={customStyles.modalContainer}>
           <h2>Enter list details</h2>
@@ -142,36 +129,40 @@ export default function Home({posts}) {
           </form>
         </Box>
       </Modal>
-    
-    {/* END CREATE TO DO FORM */}
 
+      {/* END CREATE TO DO FORM */}
 
-    {/* DISPLAY TODOS HERE */}
-<div className={styles.container}>
-<h1
-style={{
-fontFamily:"Space Grotest, sans-serif",
-color: '#009AFE',
-fontSize: '48px',
-fontWeight: 'lighter'
-}}
->
-  Your latest todo items
-</h1>
-  {posts.length === 0 ? (
-<Stack spacing={5}>
-  <p style={{fontFamily: 'Space Grotest, sans-serif', color: '#009AFE',}}>Nothing here... Create One?</p>
-</Stack>
-  ) : (
-    <ul>
-      {posts.map((post,index) => (
-        <PostCard post={post} key={index}/>
-      ))}
-    </ul>
-  )}
-</div>
-
-
+      {/* DISPLAY TODOS HERE */}
+      <div className={styles.container}>
+        <h1
+          style={{
+            fontFamily: "Space Grotest, sans-serif",
+            color: "#009AFE",
+            fontSize: "48px",
+            fontWeight: "lighter",
+          }}
+        >
+          Your latest todo items
+        </h1>
+        {posts.length === 0 ? (
+          <Stack spacing={5}>
+            <p
+              style={{
+                fontFamily: "Space Grotest, sans-serif",
+                color: "#009AFE",
+              }}
+            >
+              Nothing here... Create One?
+            </p>
+          </Stack>
+        ) : (
+          <ul>
+            {posts.map((post, index) => (
+              <PostCard post={post} key={index} />
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }
@@ -179,7 +170,7 @@ fontWeight: 'lighter'
 // Server side rendering. Fetch data on each request
 export async function getServerSideProps(context) {
   // get the current environment
-  let dev = process.env.NODE_ENV !== 'production';
+  let dev = process.env.NODE_ENV !== "production";
   let { DEV_URL, PROD_URL } = process.env;
 
   // request posts from api
@@ -188,13 +179,11 @@ export async function getServerSideProps(context) {
   let data = await response.json();
 
   return {
-      props: {
-          posts: data['message'],
-      },
+    props: {
+      posts: data["message"],
+    },
   };
 }
-
-
 
 const customStyles = {
   content: {

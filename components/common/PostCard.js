@@ -1,6 +1,13 @@
 import {useState} from 'react';
 import {useRouter} from 'next/router';
 
+//Icons
+import {BsFillTrash2Fill as Trash, BsFillCheckCircleFill as Check} from 'react-icons/bs'
+
+
+// Components
+import Wave from '../Wave';
+
 // Styles
 import styles from '../../styles/postCard.module.scss';
 
@@ -54,25 +61,49 @@ return setDeleting(false);
 
     return (
         <>
-        <div className={styles.container}>
-        <h3>{post.title}</h3>
-        <li className={styles.list}>
-            <p>{post.content}</p>
-            <small>{new Date(post.createdAt).toLocaleDateString()}</small>
-        <br/>
-        <div className={styles.buttonContainer}>
-        {!post.published ? (
-            <button className={styles.button} style={{marginRight: '20px'}}type='button' onClick={() => publishPost(post._id)}>
-                {publishing ? 'Publishing' : 'Publish'}
-            </button>
-        ): null}
-    <button className={styles.button} type='button' onClick={() => deletePost(post._id)}>
-        {deleting ? 'Deleting' : 'Delete'}
-    </button>
+        
+    <div className={styles.container}>
+<div className={styles.cardContent}>
+    <div className={styles.cardDetails}>
+        <h1 style={{fontSize: '25px'}}>{post.title}</h1>
+        <h2 style={{fontSize: '15px'}}>{post.content}</h2>
     </div>
-        </li>
-        </div>
+
+    <div className={styles.buttonContainer}>
+    <button className={styles.primaryBtn} style={{marginRight: '20px'}}type='button' onClick={() => publishPost(post._id)}>
+        <Check/>
+    </button>
+       <button className={styles.secondaryBtn} type='button' onClick={() => deletePost(post._id)}>
+       <Trash/>
+       </button>
+    </div>
+</div>
+
+
+
+    </div>
         </>
 
     )
 }
+
+
+
+// <div className={styles.container}>
+// <h3>{post.title}</h3>
+// <li className={styles.list}>
+//     <p>{post.content}</p>
+//     <small>{new Date(post.createdAt).toLocaleDateString()}</small>
+// <br/>
+// <div className={styles.buttonContainer}>
+// {!post.published ? (
+//     <button className={styles.button} style={{marginRight: '20px'}}type='button' onClick={() => publishPost(post._id)}>
+//         {publishing ? 'Publishing' : 'Publish'}
+//     </button>
+// ): null}
+// <button className={styles.button} type='button' onClick={() => deletePost(post._id)}>
+// {deleting ? 'Deleting' : 'Delete'}
+// </button>
+// </div>
+// </li>
+// </div>
