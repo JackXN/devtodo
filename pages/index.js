@@ -4,13 +4,21 @@ import { useState } from "react";
 import { Box, Text, Container } from "@chakra-ui/react";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
+import { Formik } from "formik";
 //Components
 
 import Wave from "../components/Wave";
 // import LatestTodos from "../components/index/LatestTodos";
 import PostCard from "../components/common/PostCard";
 // import Button from '../components/common/Button';
-import { Button, Input, FormControl, Stack } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  FormControl,
+  Stack,
+  FormHelperText,
+  FormLabel,
+} from "@chakra-ui/react";
 
 //Styles
 import styles from "../styles/index.module.scss";
@@ -20,9 +28,10 @@ export default function Home({ posts }) {
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [contentTwo, setContentTwo] = useState('')
-  const [contentThree, setContentThree] = useState('');
-  const [contentFour, setContentFour] = useState('');
+  const [contentTwo, setContentTwo] = useState("");
+  const [contentThree, setContentThree] = useState("");
+  const [contentFour, setContentFour] = useState("");
+
   const handlePost = async (e) => {
     e.preventDefault();
 
@@ -34,7 +43,6 @@ export default function Home({ posts }) {
     if (!title || !content) return setError("All fields are required");
 
     // post structure
-    // !!! FIX CONTENT INPUTS LATER, THIS MAY BREAK THE APP
     let post = {
       title,
       content,
@@ -67,6 +75,8 @@ export default function Home({ posts }) {
     }
   };
 
+
+  // MODAL SETUP
   Modal.setAppElement("#__next");
   const router = useRouter();
 
@@ -79,8 +89,25 @@ export default function Home({ posts }) {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const afterOpenModal = () => {
 
-  function afterOpenModal() {}
+  }
+
+
+
+const formValidate = () => {
+  const validateTitle = (value) => {
+    let error;
+    if(!value) {
+      error = 'title is requred'
+    }else if(value.toLowerCase() !== 'gym'){
+      error = 'jeez nerd'
+    }
+    return error
+  }
+}
+
+
 
   return (
     <>
@@ -111,26 +138,30 @@ export default function Home({ posts }) {
           <h2>Enter list details</h2>
           <form sx={customStyles.modalForm} onSubmit={handlePost}>
             <Stack spacing={10}>
+              <FormControl isRequired={true}>
+                <FormLabel>Todo Title</FormLabel>
+                <Input
+                  placeholder="Groceries..."
+                  size="lg"
+                  sx={customStyles.input}
+                  type="text"
+                  name="title"
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
+                />
+              </FormControl>
+          
+                <Input
+                  placeholder="Todo #1..."
+                  size="lg"
+                  sx={customStyles.input}
+                  name="content"
+                  onChange={(e) => setContent(e.target.value)}
+                  value={content}
+                />
+      
+              {/* TEST INPUT */}
               <Input
-                placeholder="Title"
-                size="lg"
-                sx={customStyles.input}
-                type="text"
-                name="title"
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
-              />
-              <Input
-                placeholder="Todo #1..."
-                size="lg"
-                sx={customStyles.input}
-                name="content"
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
-              />
-
-{/* TEST INPUT */}
-               <Input
                 placeholder="Todo #2..."
                 size="lg"
                 sx={customStyles.input}
@@ -138,7 +169,7 @@ export default function Home({ posts }) {
                 onChange={(e) => setContentTwo(e.target.value)}
                 value={contentTwo}
               />
-                  <Input
+              <Input
                 placeholder="Todo #3..."
                 size="lg"
                 sx={customStyles.input}
@@ -146,7 +177,7 @@ export default function Home({ posts }) {
                 onChange={(e) => setContentThree(e.target.value)}
                 value={contentThree}
               />
-                  <Input
+              <Input
                 placeholder="Todo #4..."
                 size="lg"
                 sx={customStyles.input}
@@ -216,6 +247,8 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+//! MOVE TO ANOTHER FILE
 
 const customStyles = {
   content: {

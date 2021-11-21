@@ -31,6 +31,8 @@
 
 .buttonContainer { 
     padding: 20px;
+    display: flex;
+    flex-direction: column;
     
 }
 .topContainer {
@@ -79,4 +81,21 @@
 .title {
     border-bottom: solid black 1px;
     padding-bottom: 20px;
+}
+
+.todoList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-align: center;
+    float: left;
+    
+}
+
+.todoList li {
+    margin: 10px;
+    list-style: circle;
+    
 }

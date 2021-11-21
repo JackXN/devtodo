@@ -69,11 +69,11 @@ return setDeleting(false);
         <h1 className={styles.title}>
             {post.title}
         </h1>
-        <ol style={{display: 'flex', flexDirection: 'column', textAlign: 'center', justifyContent: 'center', alignItems: 'center', padding: '0'}}>
-        <h1>{post.content}</h1>
-        <h1>{post.contentTwo}</h1>
-        <h1>{post.contentThree}</h1>
-        <h1>{post.contentFour}</h1>
+        <ol className={styles.todoList}>
+        <li>{post.content}</li>
+        <li>{post.contentTwo}</li>
+        <li>{post.contentThree}</li>
+        <li>{post.contentFour}</li>
         </ol>
       
     </div>
