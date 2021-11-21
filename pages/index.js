@@ -139,8 +139,9 @@ const formValidate = () => {
           <form sx={customStyles.modalForm} onSubmit={handlePost}>
             <Stack spacing={10}>
               <FormControl isRequired={true}>
-                <FormLabel>Todo Title</FormLabel>
+                <FormLabel>List Title</FormLabel>
                 <Input
+                isInvalid
                   placeholder="Groceries..."
                   size="lg"
                   sx={customStyles.input}
