@@ -20,7 +20,9 @@ export default function Home({ posts }) {
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
+  const [contentTwo, setContentTwo] = useState('')
+  const [contentThree, setContentThree] = useState('');
+  const [contentFour, setContentFour] = useState('');
   const handlePost = async (e) => {
     e.preventDefault();
 
@@ -32,9 +34,13 @@ export default function Home({ posts }) {
     if (!title || !content) return setError("All fields are required");
 
     // post structure
+    // !!! FIX CONTENT INPUTS LATER, THIS MAY BREAK THE APP
     let post = {
       title,
       content,
+      contentTwo,
+      contentThree,
+      contentFour,
       published: false,
       createdAt: new Date().toISOString(),
     };
@@ -115,12 +121,38 @@ export default function Home({ posts }) {
                 value={title}
               />
               <Input
-                placeholder="Description"
+                placeholder="Todo #1..."
                 size="lg"
                 sx={customStyles.input}
                 name="content"
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
+              />
+
+{/* TEST INPUT */}
+               <Input
+                placeholder="Todo #2..."
+                size="lg"
+                sx={customStyles.input}
+                name="contentTwo"
+                onChange={(e) => setContentTwo(e.target.value)}
+                value={contentTwo}
+              />
+                  <Input
+                placeholder="Todo #3..."
+                size="lg"
+                sx={customStyles.input}
+                name="contentThree"
+                onChange={(e) => setContentThree(e.target.value)}
+                value={contentThree}
+              />
+                  <Input
+                placeholder="Todo #4..."
+                size="lg"
+                sx={customStyles.input}
+                name="contentFour"
+                onChange={(e) => setContentFour(e.target.value)}
+                value={contentFour}
               />
             </Stack>
             <Button sx={customStyles.button} pt="20px" type="submit">

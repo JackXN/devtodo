@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    // background: orange;
+    flex-direction: column;
     padding: 20px;
     margin: 30px;
     left: 90px; right: 100px;
@@ -14,14 +14,19 @@
 .cardContent {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     padding: 20px;
     width: 100%;
+    text-align: center;
     // background: red;
 }
 
 .cardDetails {
-    
+    // padding-right: 200px;
+    padding: 20px;
+    text-align: center;
+  
 }
 
 .buttonContainer { 
@@ -69,4 +74,9 @@
         box-shadow: 0px 15px 20px rgba(255,255,255,0.4);
         transform: translateY(-3px);
     }
+}
+
+.title {
+    border-bottom: solid black 1px;
+    padding-bottom: 20px;
 }
