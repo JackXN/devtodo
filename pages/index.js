@@ -112,12 +112,12 @@ const formValidate = () => {
   return (
     <>
       <Head>
-        <title>uitodo</title>
+        <title>devtodo</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.waveContainer}>
         <div className={styles.container}>
-          <h1 className={styles.title}>Welcome to uitodo </h1>
+          <h1 className={styles.title}>Welcome to devtodo </h1>
 
           <Button type="primary" onClick={openModal} sx={customStyles.button}>
             Create To-Do List
