@@ -238,7 +238,10 @@ export async function getServerSideProps(context) {
   let { DEV_URL, PROD_URL } = process.env;
 
   // request posts from api
-  let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
+  // let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
+  let response = await fetch(`${process.env}/api/posts`)
+  
+  
   // extract the data
   let data = await response.json();
 
